@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Notification Application</string>
+    <string name="delivery_notification">Notificación de envío</string>
+    <string name="appointment_notification">Notificación de cita</string>
+    <string name="unknown_notification">Notificación desconocida</string>
+    <string name="date_notification">%1$s %2$s</string>
+    <string name="read">read</string>
+    <string name="unread">unread</string>
+</resources>
