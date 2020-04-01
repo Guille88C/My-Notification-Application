@@ -14,7 +14,7 @@ import com.gcuestab.pushnotification.R
 import java.util.concurrent.TimeUnit
 
 object MyNotificationManager {
-    fun makeNotification(type: String, message: String, context: Context) {
+    fun makeNotification(title: String, message: String, context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(context)
         }
@@ -24,7 +24,7 @@ object MyNotificationManager {
             NOTIFICATION_CHANNEL_ID
         )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(type)
+            .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVibrate(LongArray(0))
@@ -46,11 +46,11 @@ object MyNotificationManager {
         notificationManager?.createNotificationChannel(channel)
     }
 
-    fun saveNotification(application: Application, type: String?, description: String?) {
+    fun saveNotification(application: Application, title: String?, description: String?) {
         val workManager = WorkManager.getInstance(application)
 
         val builder = Data.Builder()
-        builder.putString(NOTIFICATION_WORK_TITLE_KEY, type)
+        builder.putString(NOTIFICATION_WORK_TITLE_KEY, title)
         builder.putString(NOTIFICATION_WORK_DESCRIPTION_KEY, description)
 
         val notificationBuilder = OneTimeWorkRequestBuilder<SaveNotificationWorker>()

@@ -24,11 +24,11 @@ class MyNotificationService : FirebaseMessagingService() {
         MyNotificationManager.run {
             saveNotification(
                 application = application,
-                type = type,
+                title = type,
                 description = description
             )
             makeNotification(
-                type = type,
+                title = type,
                 message = description,
                 context = applicationContext
             )
