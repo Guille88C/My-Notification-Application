@@ -21,10 +21,10 @@ internal class SaveNotificationWorker(context: Context, params: WorkerParameters
     override fun doWork(): Result {
         return try {
             insertNotification(title = getTitle(), description = getDescription())
-            Result.Success()
+            Result.success()
         } catch (throwable: Throwable) {
             Log.e(MODULE_TAG, "Error inserting notification")
-            Result.failure()
+            Result.retry()
         }
     }
 

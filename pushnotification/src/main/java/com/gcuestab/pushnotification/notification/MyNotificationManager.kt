@@ -8,11 +8,10 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.gcuestab.pushnotification.*
+import com.gcuestab.pushnotification.R
+import java.util.concurrent.TimeUnit
 
 object MyNotificationManager {
     fun makeNotification(type: String, message: String, context: Context) {
@@ -56,12 +55,18 @@ object MyNotificationManager {
 
         val notificationBuilder = OneTimeWorkRequestBuilder<SaveNotificationWorker>()
         notificationBuilder.setInputData(builder.build())
+        notificationBuilder.setBackoffCriteria(
+            BackoffPolicy.LINEAR,
+            OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+            TimeUnit.MILLISECONDS
+        )
 
         workManager
             .beginUniqueWork(
                 NOTIFICATION_WORK_NAME,
                 ExistingWorkPolicy.APPEND,
                 notificationBuilder.build()
-            ).enqueue()
+            )
+            .enqueue()
     }
 }
