@@ -1,10 +1,11 @@
-package com.gcuestab.mynotificationapplication.data
+package com.gcuestab.pushnotification.data
 
-import com.gcuestab.mynotificationapplication.data.database.NotificationDataBaseRoom
-import com.gcuestab.mynotificationapplication.data.database.mapData
-import com.gcuestab.mynotificationapplication.data.database.mapDataRoom
+import com.gcuestab.pushnotification.data.database.NotificationDataBaseRoom
+import com.gcuestab.pushnotification.data.database.mapData
+import com.gcuestab.pushnotification.data.database.mapDataRoom
 
-class NotificationLocalDataSourceImpl(private val database: NotificationDataBaseRoom) : NotificationLocalDataSource {
+internal class NotificationLocalDataSourceImpl(private val database: NotificationDataBaseRoom) :
+    NotificationLocalDataSource {
     override fun insertNotification(notification: NotificationData) {
         database.notificationDao().insert(notification = notification.mapDataRoom())
     }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gcuestab.mynotificationapplication.data.NotificationRepository
+import com.gcuestab.pushnotification.data.NotificationRepository
 import com.gcuestab.mynotificationapplication.view.entity.Notification
 import com.gcuestab.mynotificationapplication.view.entity.toData
 import kotlinx.coroutines.Dispatchers

@@ -2,7 +2,7 @@ package com.gcuestab.mynotificationapplication.view.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.gcuestab.mynotificationapplication.data.NotificationRepository
+import com.gcuestab.pushnotification.data.NotificationRepository
 
 class MainViewModelFactory(private val repository: NotificationRepository) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

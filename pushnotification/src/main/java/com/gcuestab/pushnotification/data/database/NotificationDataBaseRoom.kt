@@ -1,4 +1,4 @@
-package com.gcuestab.mynotificationapplication.data.database
+package com.gcuestab.pushnotification.data.database
 
 import android.content.Context
 import androidx.room.Database
@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [NotificationDataRoom::class], version = 1, exportSchema = false)
-abstract class NotificationDataBaseRoom : RoomDatabase() {
+internal abstract class NotificationDataBaseRoom : RoomDatabase() {
     abstract fun notificationDao(): NotificationDaoRoom
 
     companion object {

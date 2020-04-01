@@ -6,27 +6,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.gcuestab.mynotificationapplication.R
-import com.gcuestab.mynotificationapplication.data.NotificationLocalDataSourceImpl
-import com.gcuestab.mynotificationapplication.data.NotificationRepository
-import com.gcuestab.mynotificationapplication.data.database.NotificationDataBaseRoom
 import com.gcuestab.mynotificationapplication.view.entity.Notification
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailActivity : AppCompatActivity() {
 
-    private val repository: NotificationRepository by lazy {
-        NotificationRepository(
-            localDataSource = NotificationLocalDataSourceImpl(
-                database = NotificationDataBaseRoom.getDataBase(context = applicationContext)
-            )
-        )
-    }
-
-    private val viewModel: DetailViewModel by lazy {
-        DetailViewModelFactory(
-            repository = repository,
-            notification = intent.extras?.getParcelable(DATA)
-        ).create(DetailViewModel::class.java)
+    private val viewModel by viewModel<DetailViewModel> {
+        parametersOf(intent.extras?.getParcelable(DATA))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

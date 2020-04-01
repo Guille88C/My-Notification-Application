@@ -4,6 +4,7 @@ import android.util.Log
 import com.gcuestab.mynotificationapplication.APP_TAG
 import com.gcuestab.mynotificationapplication.NOTIFICATION_DESCRIPTION_KEY
 import com.gcuestab.mynotificationapplication.NOTIFICATION_TYPE_KEY
+import com.gcuestab.pushnotification.notification.MyNotificationManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 

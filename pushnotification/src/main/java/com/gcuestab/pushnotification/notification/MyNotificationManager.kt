@@ -1,4 +1,4 @@
-package com.gcuestab.mynotificationapplication.notification
+package com.gcuestab.pushnotification.notification
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -12,7 +12,7 @@ import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.gcuestab.mynotificationapplication.*
+import com.gcuestab.pushnotification.*
 
 object MyNotificationManager {
     fun makeNotification(type: String, message: String, context: Context) {
@@ -51,7 +51,7 @@ object MyNotificationManager {
         val workManager = WorkManager.getInstance(application)
 
         val builder = Data.Builder()
-        builder.putString(NOTIFICATION_WORK_TYPE_KEY, type)
+        builder.putString(NOTIFICATION_WORK_TITLE_KEY, type)
         builder.putString(NOTIFICATION_WORK_DESCRIPTION_KEY, description)
 
         val notificationBuilder = OneTimeWorkRequestBuilder<SaveNotificationWorker>()

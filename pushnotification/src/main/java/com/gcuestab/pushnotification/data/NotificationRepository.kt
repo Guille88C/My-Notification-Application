@@ -1,4 +1,4 @@
-package com.gcuestab.mynotificationapplication.data
+package com.gcuestab.pushnotification.data
 
 class NotificationRepository(private val localDataSource: NotificationLocalDataSource) {
     fun getNotifications() = localDataSource.getNotifications()

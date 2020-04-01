@@ -1,4 +1,4 @@
-package com.gcuestab.mynotificationapplication.data
+package com.gcuestab.pushnotification.data
 
 interface NotificationLocalDataSource {
     fun insertNotification(notification: NotificationData)

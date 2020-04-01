@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gcuestab.mynotificationapplication.data.NotificationData
-import com.gcuestab.mynotificationapplication.data.NotificationRepository
 import com.gcuestab.mynotificationapplication.view.entity.Notification
 import com.gcuestab.mynotificationapplication.view.entity.toView
+import com.gcuestab.pushnotification.data.NotificationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,8 @@ class MainViewModel(private val repository: NotificationRepository) : ViewModel(
             val lNotifications = ArrayList<Notification>()
 
             repository.getNotifications().forEach { notificationData ->
-                if (notificationData.type != NotificationData.Type.UNKNOWN) {
+                val notificationItem = notificationData.toView()
+                if (notificationItem.isKnown()) {
                     lNotifications.add(notificationData.toView())
                 }
             }

@@ -3,7 +3,7 @@ package com.gcuestab.mynotificationapplication.view.entity
 import android.os.Parcelable
 import com.gcuestab.mynotificationapplication.DAYS_PATTERN
 import com.gcuestab.mynotificationapplication.HOURS_PATTERN
-import com.gcuestab.mynotificationapplication.data.NotificationData
+import com.gcuestab.pushnotification.data.NotificationData
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 import java.text.SimpleDateFormat as SimpleDateFormat1
@@ -16,10 +16,10 @@ data class Notification(
     val type: Type,
     val description: String
 ) : Parcelable {
-    enum class Type {
-        DELIVERY,
-        APPOINTMENT,
-        UNKNOWN
+    enum class Type(val description: String) {
+        DELIVERY("envio"),
+        APPOINTMENT("cita"),
+        UNKNOWN("desconocido")
     }
 
     fun dateToHours(): String = getDateFormatted(pattern = HOURS_PATTERN)
@@ -32,6 +32,8 @@ data class Notification(
         calendar.timeInMillis = date
         return formatter.format(calendar.time)
     }
+
+    fun isKnown() = type != Type.UNKNOWN
 }
 
 fun NotificationData.toView(): Notification =
@@ -39,10 +41,10 @@ fun NotificationData.toView(): Notification =
         id = id,
         isRead = isRead,
         date = date,
-        type = when (type) {
-            NotificationData.Type.DELIVERY -> Notification.Type.DELIVERY
-            NotificationData.Type.APPOINTMENT -> Notification.Type.APPOINTMENT
-            NotificationData.Type.UNKNOWN -> Notification.Type.UNKNOWN
+        type = when (title) {
+            "envio" -> Notification.Type.DELIVERY
+            "cita" -> Notification.Type.APPOINTMENT
+            else -> Notification.Type.UNKNOWN
         },
         description = description
     )
@@ -52,10 +54,6 @@ fun Notification.toData(): NotificationData =
         id = id,
         isRead = isRead,
         date = date,
-        type = when (type) {
-            Notification.Type.DELIVERY -> NotificationData.Type.DELIVERY
-            Notification.Type.APPOINTMENT -> NotificationData.Type.APPOINTMENT
-            Notification.Type.UNKNOWN -> NotificationData.Type.UNKNOWN
-        },
+        title = type.description,
         description = description
     )

@@ -2,7 +2,7 @@ package com.gcuestab.mynotificationapplication.view.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.gcuestab.mynotificationapplication.data.NotificationRepository
+import com.gcuestab.pushnotification.data.NotificationRepository
 import com.gcuestab.mynotificationapplication.view.entity.Notification
 
 class DetailViewModelFactory(

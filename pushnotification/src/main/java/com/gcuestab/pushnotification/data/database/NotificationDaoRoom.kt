@@ -1,4 +1,4 @@
-package com.gcuestab.mynotificationapplication.data.database
+package com.gcuestab.pushnotification.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface NotificationDaoRoom {
+internal interface NotificationDaoRoom {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(notification: NotificationDataRoom)
 
