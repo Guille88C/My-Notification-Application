@@ -9,13 +9,10 @@ import com.gcuestab.pushnotification.MODULE_TAG
 import com.gcuestab.pushnotification.NOTIFICATION_WORK_DESCRIPTION_KEY
 import com.gcuestab.pushnotification.NOTIFICATION_WORK_TITLE_KEY
 import com.gcuestab.pushnotification.data.NotificationData
-import com.gcuestab.pushnotification.data.NotificationRepository
-import org.koin.java.KoinJavaComponent.inject
+import com.gcuestab.pushnotification.di.getNotificationRepository
 
 internal class SaveNotificationWorker(context: Context, params: WorkerParameters) :
     Worker(context, params) {
-
-    private val repository by inject(NotificationRepository::class.java)
 
     @SuppressLint("RestrictedApi")
     override fun doWork(): Result {
@@ -50,7 +47,7 @@ internal class SaveNotificationWorker(context: Context, params: WorkerParameters
         title: String,
         description: String
     ) {
-        repository.insertNotification(
+        getNotificationRepository(context = applicationContext).insertNotification(
             notification = NotificationData(
                 id = 0,
                 isRead = false,
