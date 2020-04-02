@@ -4,6 +4,7 @@ import android.util.Log
 import com.gcuestab.mynotificationapplication.APP_TAG
 import com.gcuestab.mynotificationapplication.NOTIFICATION_DESCRIPTION_KEY
 import com.gcuestab.mynotificationapplication.NOTIFICATION_TYPE_KEY
+import com.gcuestab.mynotificationapplication.R
 import com.gcuestab.pushnotification.notification.MyNotificationManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -28,6 +29,7 @@ class MyNotificationService : FirebaseMessagingService() {
                 description = description
             )
             makeNotification(
+                icon = R.drawable.ic_launcher_foreground,
                 title = type,
                 message = description,
                 context = applicationContext

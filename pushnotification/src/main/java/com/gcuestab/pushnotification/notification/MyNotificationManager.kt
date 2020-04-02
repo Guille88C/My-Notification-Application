@@ -10,11 +10,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
 import com.gcuestab.pushnotification.*
-import com.gcuestab.pushnotification.R
 import java.util.concurrent.TimeUnit
 
 object MyNotificationManager {
-    fun makeNotification(title: String, message: String, context: Context) {
+    fun makeNotification(icon: Int, title: String, message: String, context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(context)
         }
@@ -23,7 +22,7 @@ object MyNotificationManager {
             context,
             NOTIFICATION_CHANNEL_ID
         )
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
