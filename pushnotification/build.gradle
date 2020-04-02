@@ -49,3 +49,30 @@ dependencies {
     def work_version = "2.3.4"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 }
+
+ext {
+    bintrayRepo = 'my-libraries'
+    bintrayName = 'pushnotification'
+
+    publishedGroupId = 'com.gcuestab'
+    artifact = 'pushnotification'
+
+    libraryName = 'push notification'
+    libraryDescription = 'Library to: store a push notification with 2 string fields (title, description) in a database; retrieve a stored push notidication.'
+
+    siteUrl = 'https://github.com/Guille88C/My-Notification-Application'
+    gitUrl = 'https://github.com/Guille88C/My-Notification-Application.git'
+
+    libraryVersion = '1.0-dev0'
+
+    developerId = 'gcuestab'
+    developerName = 'Guillermo Ccuesta'
+    developerEmail = 'guillecuesta@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
