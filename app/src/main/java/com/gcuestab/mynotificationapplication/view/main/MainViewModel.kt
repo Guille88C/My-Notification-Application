@@ -11,15 +11,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: NotificationRepository) : ViewModel() {
-    private val _notifications = MutableLiveData<List<Notification>>()
 
+    private val _totalNotifications = MutableLiveData<Int>()
+    val totalNotifications: LiveData<Int>
+        get() = _totalNotifications
+
+    private val _notifications = MutableLiveData<List<Notification>>()
     val notifications: LiveData<List<Notification>>
         get() = _notifications
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            getTotalNotifications()
             getNotifications()
         }
+    }
+
+    private fun getTotalNotifications() {
+        _totalNotifications.postValue(repository.getTotalNotifications())
     }
 
     private fun getNotifications() {
@@ -37,6 +46,7 @@ class MainViewModel(private val repository: NotificationRepository) : ViewModel(
 
     fun refreshLaunched() {
         viewModelScope.launch(Dispatchers.IO) {
+            getTotalNotifications()
             getNotifications()
         }
     }
@@ -44,6 +54,7 @@ class MainViewModel(private val repository: NotificationRepository) : ViewModel(
     fun clearPressed() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.clearNotifications()
+            getTotalNotifications()
             getNotifications()
         }
     }

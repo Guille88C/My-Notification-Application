@@ -18,4 +18,7 @@ internal interface NotificationDaoRoom {
 
     @Query(value = "DELETE FROM notification_table")
     fun clearNotifications()
+
+    @Query(value = "SELECT COUNT(*) FROM notification_table")
+    fun getTotalNotifications(): Int
 }

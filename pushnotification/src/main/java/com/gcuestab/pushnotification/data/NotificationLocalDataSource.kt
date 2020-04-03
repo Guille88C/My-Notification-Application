@@ -5,4 +5,5 @@ interface NotificationLocalDataSource {
     fun readNotification(id: Int)
     fun getNotifications(): List<NotificationData>
     fun clearNotifications()
+    fun getTotalNotifications(): Int
 }
