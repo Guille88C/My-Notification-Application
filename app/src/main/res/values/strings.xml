@@ -6,4 +6,5 @@
     <string name="date_notification">%1$s %2$s</string>
     <string name="read">read</string>
     <string name="unread">unread</string>
+    <string name="clear">Clear</string>
 </resources>

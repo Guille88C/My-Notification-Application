@@ -17,25 +17,34 @@ class MainViewModel(private val repository: NotificationRepository) : ViewModel(
         get() = _notifications
 
     init {
-        getNotifications()
-    }
-
-    private fun getNotifications() {
         viewModelScope.launch(Dispatchers.IO) {
-            val lNotifications = ArrayList<Notification>()
-
-            repository.getNotifications().forEach { notificationData ->
-                val notificationItem = notificationData.toView()
-                if (notificationItem.isKnown()) {
-                    lNotifications.add(notificationData.toView())
-                }
-            }
-
-            _notifications.postValue(lNotifications)
+            getNotifications()
         }
     }
 
+    private fun getNotifications() {
+        val lNotifications = ArrayList<Notification>()
+
+        repository.getNotifications().forEach { notificationData ->
+            val notificationItem = notificationData.toView()
+            if (notificationItem.isKnown()) {
+                lNotifications.add(notificationData.toView())
+            }
+        }
+
+        _notifications.postValue(lNotifications)
+    }
+
     fun refreshLaunched() {
-        getNotifications()
+        viewModelScope.launch(Dispatchers.IO) {
+            getNotifications()
+        }
+    }
+
+    fun clearPressed() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearNotifications()
+            getNotifications()
+        }
     }
 }

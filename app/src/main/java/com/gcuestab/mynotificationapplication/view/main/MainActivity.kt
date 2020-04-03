@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.refreshLaunched()
         }
 
+        bActivityMainClear?.setOnClickListener {
+            viewModel.clearPressed()
+        }
+
         viewModel.notifications.observe(this, Observer { notifications ->
             (rvActivityMain?.adapter as? MainAdapter?)?.submitList(notifications)
             srlActivityMain?.isRefreshing = false
