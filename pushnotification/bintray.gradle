@@ -2,47 +2,31 @@ apply plugin: 'com.jfrog.bintray'
 
 version = libraryVersion
 
-if (project.hasProperty("android")) { // Android libraries
+if (project.hasProperty("android")) {
     task sourcesJar(type: Jar) {
         archiveClassifier.set('sources')
         from android.sourceSets.main.java.srcDirs
     }
-
-//    task javadoc(type: Javadoc) {
-//        source = android.sourceSets.main.java.srcDirs
-//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//    }
-} else { // Java libraries
+} else {
     task sourcesJar(type: Jar, dependsOn: classes) {
         archiveClassifier.set('sources')
         from sourceSets.main.allSource
     }
 }
 
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-
 artifacts {
-//    archives javadocJar
     archives sourcesJar
 }
 
-// Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = 'sephirothgcb'
+    key = '3fb46f6177cb003bceeb79057b9d86405bd1412d'
 
-    //noinspection GroovyAccessibility
     configurations = ['archives']
     pkg {
         repo = bintrayRepo
         name = bintrayName
-        userOrg = properties.getProperty("bintray.org")
+        userOrg = 'put05'
         desc = libraryDescription
         websiteUrl = siteUrl
         vcsUrl = gitUrl
@@ -51,11 +35,6 @@ bintray {
         publicDownloadNumbers = true
         version {
             desc = libraryDescription
-//            gpg {
-//                sign = true //Determines whether to GPG sign the files. The default is false
-//                passphrase = properties.getProperty("bintray.gpg.password")
-//                //Optional. The passphrase for GPG signing'
-//            }
         }
     }
 }
