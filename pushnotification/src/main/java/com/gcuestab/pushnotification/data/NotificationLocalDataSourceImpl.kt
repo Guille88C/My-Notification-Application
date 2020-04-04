@@ -23,4 +23,10 @@ internal class NotificationLocalDataSourceImpl(private val database: Notificatio
 
         return lNotifications
     }
+
+    override fun clearNotifications() {
+        database.notificationDao().clearNotifications()
+    }
+
+    override fun getTotalNotifications(): Int = database.notificationDao().getTotalNotifications()
 }

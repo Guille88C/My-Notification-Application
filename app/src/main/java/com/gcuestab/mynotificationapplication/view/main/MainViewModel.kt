@@ -11,31 +11,51 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: NotificationRepository) : ViewModel() {
-    private val _notifications = MutableLiveData<List<Notification>>()
 
+    private val _totalNotifications = MutableLiveData<Int>()
+    val totalNotifications: LiveData<Int>
+        get() = _totalNotifications
+
+    private val _notifications = MutableLiveData<List<Notification>>()
     val notifications: LiveData<List<Notification>>
         get() = _notifications
 
     init {
-        getNotifications()
-    }
-
-    private fun getNotifications() {
         viewModelScope.launch(Dispatchers.IO) {
-            val lNotifications = ArrayList<Notification>()
-
-            repository.getNotifications().forEach { notificationData ->
-                val notificationItem = notificationData.toView()
-                if (notificationItem.isKnown()) {
-                    lNotifications.add(notificationData.toView())
-                }
-            }
-
-            _notifications.postValue(lNotifications)
+            getTotalNotifications()
+            getNotifications()
         }
     }
 
+    private fun getTotalNotifications() {
+        _totalNotifications.postValue(repository.getTotalNotifications())
+    }
+
+    private fun getNotifications() {
+        val lNotifications = ArrayList<Notification>()
+
+        repository.getNotifications().forEach { notificationData ->
+            val notificationItem = notificationData.toView()
+            if (notificationItem.isKnown()) {
+                lNotifications.add(notificationData.toView())
+            }
+        }
+
+        _notifications.postValue(lNotifications)
+    }
+
     fun refreshLaunched() {
-        getNotifications()
+        viewModelScope.launch(Dispatchers.IO) {
+            getTotalNotifications()
+            getNotifications()
+        }
+    }
+
+    fun clearPressed() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearNotifications()
+            getTotalNotifications()
+            getNotifications()
+        }
     }
 }

@@ -10,4 +10,10 @@ class NotificationRepository(private val localDataSource: NotificationLocalDataS
     fun readNotification(notification: NotificationData) {
         localDataSource.readNotification(id = notification.id)
     }
+
+    fun clearNotifications() {
+        localDataSource.clearNotifications()
+    }
+
+    fun getTotalNotifications(): Int = localDataSource.getTotalNotifications()
 }
