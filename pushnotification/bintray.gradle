@@ -19,14 +19,17 @@ artifacts {
 }
 
 bintray {
-    user = 'sephirothgcb'
-    key = '3fb46f6177cb003bceeb79057b9d86405bd1412d'
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
         repo = bintrayRepo
         name = bintrayName
-        userOrg = 'put05'
+        userOrg = properties.getProperty("bintray.org")
         desc = libraryDescription
         websiteUrl = siteUrl
         vcsUrl = gitUrl
