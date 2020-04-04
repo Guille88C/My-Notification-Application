@@ -19,13 +19,11 @@ artifacts {
 }
 
 bintray {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
     user = 'sephirothgcb'
     key = '3fb46f6177cb003bceeb79057b9d86405bd1412d'
 
     configurations = ['archives']
+
     pkg {
         repo = bintrayRepo
         name = bintrayName
