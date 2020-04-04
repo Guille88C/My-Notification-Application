@@ -19,15 +19,15 @@ artifacts {
 }
 
 bintray {
-    user = 'sephirothgcb'
-    key = '3fb46f6177cb003bceeb79057b9d86405bd1412d'
+    user = System.getenv('BINTRAY_USERNAME')
+    key = System.getenv('BINTRAY_APIKEY')
 
     configurations = ['archives']
 
     pkg {
         repo = bintrayRepo
         name = bintrayName
-        userOrg = 'put05'
+        userOrg = System.getenv('BINTRAY_ORGANIZATION')
         desc = libraryDescription
         websiteUrl = siteUrl
         vcsUrl = gitUrl
